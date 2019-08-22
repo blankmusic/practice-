@@ -47,4 +47,36 @@ public class Main {
 # 非递归实现树的前-中-后-层-序遍历
 
 # leetcode435 区间覆盖问题
-
+/**
+ * Definition for an interval.
+ * public class Interval {
+ *     int start;
+ *     int end;
+ *     Interval() { start = 0; end = 0; }
+ *     Interval(int s, int e) { start = s; end = e; }
+ * }
+ */
+public class Solution {
+    public int eraseOverlapIntervals(Interval[] intervals) {
+        if(intervals.length == 0) return 0;
+        
+        Comparator<Interval> comp = new Comparator<Interval>() {
+            public int compare(Interval interval1, Interval interval2) {
+                if(interval1.end > interval2.end) return 1;
+                else if(interval1.end < interval2.end) return -1;
+                else return 0;
+            }
+        };
+        
+        Arrays.sort(intervals, comp);
+        int lastend = intervals[0].end;
+        int remove = 0;
+        for(int i = 1; i < intervals.length; i++) {
+            if(intervals[i].end == lastend) remove++;
+            else if(intervals[i].start < lastend) remove++;
+            else lastend = intervals[i].end;
+        }
+        
+        return remove;
+    }
+}
