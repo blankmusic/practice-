@@ -205,3 +205,4 @@ public class Solution {
     }
 }
 ```
+# 最长全1串
