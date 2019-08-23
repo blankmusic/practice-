@@ -186,14 +186,14 @@ public class Solution {
         
         Comparator<Interval> comp = new Comparator<Interval>() {
             public int compare(Interval interval1, Interval interval2) {
-                if(interval1.end > interval2.end) return 1;
+                if(interval1.end > interval2.end) return 1;//将区间按照结束时间升序排序
                 else if(interval1.end < interval2.end) return -1;
                 else return 0;
             }
         };
         
-        Arrays.sort(intervals, comp);
-        int lastend = intervals[0].end;
+        Arrays.sort(intervals, comp);//升序排序
+        int lastend = intervals[0].end;//最早的结束时间
         int remove = 0;
         for(int i = 1; i < intervals.length; i++) {
             if(intervals[i].end == lastend) remove++;
